@@ -16,10 +16,14 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
     private String name;
+
+
     @Embedded
     private Address address;
-    @JsonIgnore
+
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "member")
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
 
