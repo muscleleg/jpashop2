@@ -24,24 +24,8 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitService {
         private final EntityManager em;
+
         public void doInit1() {
-            Member member = createMember("userB", "진주", "2", "2222");
-            em.persist(member);
-
-            Book book1 = createBook("JPA1 BOOk", 10000, 100);
-            em.persist(book1);
-
-            Book book2 = createBook("JPA2 BOOK", 20000, 100);
-            em.persist(book2);
-
-            OrderItem orderItem1 = OrderItem.createOrderItem(book1, 10000, 1);
-            OrderItem orderItem2 = OrderItem.createOrderItem(book2, 20000, 2);
-
-            Delivery delivery = createDelivery(member);
-            Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
-            em.persist(order);
-        }
-        public void doInit2() {
             Member member = createMember("userA", "서울", "1", "1111");
             em.persist(member);
 
@@ -59,7 +43,23 @@ public class InitDb {
             em.persist(order);
 
         }
+        public void doInit2() {
+            Member member = createMember("userB", "진주", "2", "2222");
+            em.persist(member);
 
+            Book book1 = createBook("JPA1 BOOk", 10000, 100);
+            em.persist(book1);
+
+            Book book2 = createBook("JPA2 BOOK", 20000, 100);
+            em.persist(book2);
+
+            OrderItem orderItem1 = OrderItem.createOrderItem(book1, 10000, 1);
+            OrderItem orderItem2 = OrderItem.createOrderItem(book2, 20000, 2);
+
+            Delivery delivery = createDelivery(member);
+            Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
+            em.persist(order);
+        }
         private Delivery createDelivery(Member member) {
             Delivery delivery = new Delivery();
             delivery.setAddress(member.getAddress());
